@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class ImageController {
 
+    private static final String UPLOAD_IMG_PAGE = "image/uploadImagePageWithFilesList.html";
     private final String directory;
 
     public ImageController() {
@@ -17,6 +18,10 @@ public class ImageController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Handler uploadPage() {
+        return context -> context.render(UPLOAD_IMG_PAGE);
     }
 
     public Handler upload() {

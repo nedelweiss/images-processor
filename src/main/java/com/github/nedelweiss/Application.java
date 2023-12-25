@@ -2,7 +2,7 @@ package com.github.nedelweiss;
 
 import com.github.nedelweiss.image.ImageController;
 import io.javalin.Javalin;
-import io.javalin.http.staticfiles.Location;
+import io.javalin.rendering.template.JavalinJte;
 
 public class Application {
 
@@ -11,9 +11,10 @@ public class Application {
     public static void main(String[] args) {
         ImageController imageController = new ImageController();
 
-        Javalin application = Javalin.create(config -> config.staticFiles.add("/image", Location.CLASSPATH))
-            .start(JAVALIN_PORT);
+        JavalinJte.init();
+        Javalin application = Javalin.create().start(JAVALIN_PORT);
 
+        application.get("/", imageController.uploadPage());
         application.post("/upload", imageController.upload());
     }
 }
